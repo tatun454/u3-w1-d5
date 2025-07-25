@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import MovieGallery from "./components/MovieGallery";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const sagas = [
+    {
+      name: "Harry Potter",
+      imdbIDs: ["tt0241527", "tt0295297", "tt0304141"],
+    },
+    {
+      name: "Lord of the Rings",
+      imdbIDs: ["tt0120737", "tt0167260", "tt0167261"],
+    },
+    {
+      name: "Star Wars",
+      imdbIDs: ["tt0076759", "tt0080684", "tt0086190"],
+    },
+  ];
+
+  const [error, setError] = React.useState(null);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <main
+        style={{
+          padding: "1rem",
+          backgroundColor: "#141414",
+          color: "white",
+          minHeight: "100vh",
+        }}
+      >
+        {error && <p>Error: {error}</p>}
+        {sagas.map((saga) => (
+          <MovieGallery
+            key={saga.name}
+            sagaName={saga.name}
+            imdbIDs={saga.imdbIDs}
+            onError={setError}
+          />
+        ))}
+      </main>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
