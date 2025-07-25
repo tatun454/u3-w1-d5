@@ -1,7 +1,10 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MovieGallery from "./components/MovieGallery";
+import Settings from "./components/Settings";
+import Profile from "./components/Profile";
 import "./App.css";
 
 function App() {
@@ -23,7 +26,7 @@ function App() {
   const [error, setError] = React.useState(null);
 
   return (
-    <>
+    <Router>
       <Navbar />
       <main
         style={{
@@ -33,18 +36,29 @@ function App() {
           minHeight: "100vh",
         }}
       >
-        {error && <p>Error: {error}</p>}
-        {sagas.map((saga) => (
-          <MovieGallery
-            key={saga.name}
-            sagaName={saga.name}
-            imdbIDs={saga.imdbIDs}
-            onError={setError}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                {error && <p>Error: {error}</p>}
+                {sagas.map((saga) => (
+                  <MovieGallery
+                    key={saga.name}
+                    sagaName={saga.name}
+                    imdbIDs={saga.imdbIDs}
+                    onError={setError}
+                  />
+                ))}
+              </>
+            }
           />
-        ))}
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
       </main>
       <Footer />
-    </>
+    </Router>
   );
 }
 

@@ -47,9 +47,9 @@ const MovieGallery = ({ sagaName, imdbIDs, onLoad, onError }) => {
       <div
         style={{
           display: "flex",
-          gap: "1rem",
+          gap: "1.5rem",
           overflowX: "auto",
-          paddingBottom: "0.5rem",
+          padding: "0 2rem 0.5rem 2rem",
           scrollbarWidth: "thin",
           scrollbarColor: "#888 transparent",
         }}
@@ -57,7 +57,7 @@ const MovieGallery = ({ sagaName, imdbIDs, onLoad, onError }) => {
         {movies.map((movie) => (
           <div
             key={movie.imdbID}
-            style={{ minWidth: "150px", flex: "0 0 auto" }}
+            style={{ minWidth: "180px", flex: "0 0 auto" }}
           >
             <img
               src={
